@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Support CRM</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+    <header class="topbar">
+
+        <div>
+            <h1>Support CRM</h1>
+            <p>Customer Support Ticket Management</p>
+        </div>
+
+        <button class="primary-btn" onclick="openCreateTicket()">
+            + Create Ticket
+        </button>
+
+    </header>
+
+
+    <main class="container">
+
+        <!-- Statistics -->
+
+        <section class="stats">
+
+            <div class="stat-card">
+                <span>Total Tickets</span>
+                <strong id="totalTickets">0</strong>
+            </div>
+
+            <div class="stat-card">
+                <span>Open</span>
+                <strong id="openTickets">0</strong>
+            </div>
+
+            <div class="stat-card">
+                <span>In Progress</span>
+                <strong id="progressTickets">0</strong>
+            </div>
+
+            <div class="stat-card">
+                <span>Closed</span>
+                <strong id="closedTickets">0</strong>
+            </div>
+
+        </section>
+
+
+        <!-- Search and Filter -->
+
+        <section class="toolbar">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search tickets..."
+                oninput="loadTickets()"
+            >
+
+            <select
+                id="statusFilter"
+                onchange="loadTickets()"
+            >
+
+                <option value="All">All Status</option>
+                <option value="Open">Open</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Closed">Closed</option>
+
+            </select>
+
+        </section>
+
+
+        <!-- Ticket List -->
+
+        <section class="ticket-section">
+
+            <div class="section-header">
+                <h2>Support Tickets</h2>
+            </div>
+
+            <div id="ticketList">
+                <p class="loading">Loading tickets...</p>
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- CREATE TICKET MODAL -->
+
+    <div id="createModal" class="modal">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h2>Create New Ticket</h2>
+
+                <button onclick="closeCreateTicket()">
+                    ×
+                </button>
+
+            </div>
+
+
+            <form id="ticketForm">
+
+                <label>Customer Name</label>
+
+                <input
+                    type="text"
+                    id="customerName"
+                    required
+                >
+
+
+                <label>Customer Email</label>
+
+                <input
+                    type="email"
+                    id="customerEmail"
+                    required
+                >
+
+
+                <label>Subject</label>
+
+                <input
+                    type="text"
+                    id="subject"
+                    required
+                >
+
+
+                <label>Description</label>
+
+                <textarea
+                    id="description"
+                    rows="5"
+                    required
+                ></textarea>
+
+
+                <div class="form-actions">
+
+                    <button
+                        type="button"
+                        class="secondary-btn"
+                        onclick="closeCreateTicket()"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="primary-btn"
+                    >
+                        Create Ticket
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- TICKET DETAILS MODAL -->
+
+    <div id="detailsModal" class="modal">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h2>Ticket Details</h2>
+
+                <button onclick="closeDetails()">
+                    ×
+                </button>
+
+            </div>
+
+            <div id="ticketDetails"></div>
+
+        </div>
+
+    </div>
+
+
+    <script src="/static/app.js"></script>
+
+</body>
+
+</html>
